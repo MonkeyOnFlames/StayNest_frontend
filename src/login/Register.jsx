@@ -3,19 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./auth.css";
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  
 
   const navigate = useNavigate();
   // konsumerar contexten
-  const { login } = useAuth();
+  const { register } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await login(username, password);
+      await register(username, password);
       navigate("/");
     } catch (err) {
       console.log("error: " + err);
@@ -25,7 +26,7 @@ const Login = () => {
   return (
     
     <div className="container" style={{ width: "40rem", margin: "2rem" }}> 
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -44,7 +45,7 @@ const Login = () => {
           />
         </div>
         <div className="button">
-          <button>Login</button>
+          <button>Register</button>
           {/* <Button text="Login" type="submit" variant="auth">
               Login
             </Button> */}
@@ -54,4 +55,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
