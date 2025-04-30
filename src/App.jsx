@@ -3,7 +3,7 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
-import Button from "./button/button";
+//import Button from "./button/button";
 
 function App() {
   return (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./auth.css";
+import Button from "../button/button";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -23,32 +24,39 @@ const Login = () => {
   };
 
   return (
-    
-    <div className="container" style={{ width: "40rem", margin: "2rem" }}> 
+    <div className="container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">
+            Username<br></br>
+          </label>
           <input
             type="text"
+            placeholder="Enter your username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">
+            Password<br></br>
+          </label>
           <input
             type="password"
+            placeholder="6 + characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="button">
-          <button>Login</button>
-          {/* <Button text="Login" type="submit" variant="auth">
-              Login
-            </Button> */}
-        </div>
+
+        <Button
+          className="button"
+          text="Login"
+          type="submit"
+          variant="auth"
+          width="10"
+        />
       </form>
     </div>
   );
