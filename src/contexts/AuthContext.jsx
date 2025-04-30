@@ -43,6 +43,7 @@ export const AuthProvider = ({ children }) => {
     try {
       // kalla på backend end point som validerar JWT
       const response = await api.get("/auth/check");
+      console.log("response" + response.data);
       // om success => uppdatera state med returnerad user
       setCurrentUser(response.data);
     } catch (error) {
