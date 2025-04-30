@@ -10,7 +10,6 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <>
-          <Button text={"Register"} width={10} height={2.5} fontSize={1} />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
