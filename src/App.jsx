@@ -3,20 +3,30 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
+import Button from "./button/button";
+import Header from "./header/header";
+
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <>
+        <div className="layout">
+          <Header title="StayNest" /> 
+
+          <Home />
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+          </div>
         </>
       </AuthProvider>
     </BrowserRouter>
+  
   );
 }
 
