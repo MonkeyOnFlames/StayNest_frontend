@@ -3,8 +3,9 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
-import Button from "./button/button";
 import Header from "./header/header";
+
+
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <>
         <div className="layout">
           <Header title="StayNest" /> 
-
+          
           <Home />
           
           <Routes>

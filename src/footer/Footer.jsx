@@ -1,19 +1,18 @@
 import Button from "../button/button";
-import "../footer/footer.css";
+import "./footer.css";
+import { Link } from 'react-router';
 
-const Footer = ({title, onNavigate}) => {
+const Footer = () => {
 
         return (
             <footer className="footer">
-               <p>"&copy" All rights reserved</p>
-                <nav>
-                <Button 
-                text="About" 
-                />
-                <Button  
-                text="Contact" 
-                />
-                </nav>
+               <p>&copy All rights reserved</p>
+               <Link className="link" to="/about">About
+            
+            </Link>
+            <Link className="link" to="/contact">contact
+            
+            </Link>
             </footer>
             
         )

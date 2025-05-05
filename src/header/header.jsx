@@ -1,15 +1,29 @@
 import Button from "../button/button";
-import"../header/header.css";
+import"./header.css";
+import image from "../image/StayNest.jpg";
+import { Link } from 'react-router';
+import Login from "../login/Login";
 
-const Header = ({title, onNavigate}) => {
+
+
+
+const Header = () => {
 
 return (
+    
     <header className="header">
-        <h1>{title}</h1>
+        <h1>StayNest</h1>
         <nav>
+        
+        <div className="logo-container">
+        <Link className="link" to="/home">
+            <img src={image} alt="StayNest logo" />
+            </Link>
+        </div>
+           
         <Button  
         text="login" 
-        onClick={() => onNavigate("login")}
+        onClick={() => {Login}}
         />
 
         <Button  
