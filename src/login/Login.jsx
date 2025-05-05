@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./auth.css";
+import Button from "../button/button";
 
 
 const Login = () => {

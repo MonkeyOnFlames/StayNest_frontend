@@ -9,13 +9,9 @@ const Footer = ({title, onNavigate}) => {
                 <nav>
                 <Button 
                 text="About" 
-                backgroundColor="orange" 
-                onClick={() => onNavigate("about")}
                 />
                 <Button  
                 text="Contact" 
-                backgroundColor="orange" 
-                onClick={() => onNavigate("contact")}
                 />
                 </nav>
             </footer>

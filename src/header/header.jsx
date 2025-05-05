@@ -1,7 +1,7 @@
 import Button from "../button/button";
 import"../header/header.css";
 
-const Header = ({title, onClick}) => {
+const Header = ({title, onNavigate}) => {
 
 return (
     <header className="header">
@@ -9,6 +9,7 @@ return (
         <nav>
         <Button  
         text="login" 
+        onClick={() => onNavigate("login")}
         />
 
         <Button  
