@@ -74,6 +74,9 @@ export const AuthProvider = ({ children }) => {
       return response.data;
     } catch (error) {
       console.error("Login error:", error.response?.data || error.message);
+      throw new Error(
+        error.response?.data?.message || "Login failed, try again"
+      );
     }
   };
 
@@ -86,15 +89,33 @@ export const AuthProvider = ({ children }) => {
    * @returns {Object} Registration response data
    * @throws {Error} If registration fails
    */
-  const register = async (username, password) => {
+  const register = async (
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    age,
+    username,
+    password
+  ) => {
     try {
       const response = await api.post("/auth/register", {
+        firstName,
+        lastName,
+        email,
+        phone,
+        address,
+        age,
         username,
         password,
       });
       return response.data;
     } catch (error) {
       console.error("Register error:", error.response?.data || error.message);
+      throw new Error(
+        error.response?.data?.message || "Register failed, try again"
+      );
     }
   };
 

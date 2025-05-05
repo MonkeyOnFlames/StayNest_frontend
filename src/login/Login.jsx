@@ -7,6 +7,7 @@ import Button from "../button/button";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   // konsumerar contexten
@@ -16,9 +17,16 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      if (!username || !password) {
+        throw new Error("Username and password are required");
+      }
+
+      setError("");
+
       await login(username, password);
       navigate("/");
     } catch (err) {
+      setError(err.message);
       console.log("error: " + err);
     }
   };
@@ -26,6 +34,7 @@ const Login = () => {
   return (
     <div className="container">
       <h2>Login</h2>
+
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">
@@ -49,6 +58,8 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        <p className="error-message">{error}</p>
 
         <Button
           className="button"

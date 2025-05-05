@@ -13,6 +13,7 @@ const Register = () => {
   const [age, setAge] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   // konsumerar contexten
@@ -22,6 +23,21 @@ const Register = () => {
     e.preventDefault();
 
     try {
+      if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !phone ||
+        !adress ||
+        !age ||
+        !username ||
+        !password
+      ) {
+        throw new Error("All fields are required");
+      }
+
+      setError("");
+
       await register(
         username,
         password,
@@ -34,6 +50,7 @@ const Register = () => {
       );
       navigate("/");
     } catch (err) {
+      setError(err.message);
       console.log("error: " + err);
     }
   };
@@ -80,7 +97,7 @@ const Register = () => {
             Phone No<br></br>
           </label>
           <input
-            type="text"
+            type="number"
             value={phone}
             placeholder="With country code"
             onChange={(e) => setPhone(e.target.value)}
@@ -130,6 +147,8 @@ const Register = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
+        <p className="error-message">{error}</p>
 
         <p>By signing up you agree to our terms and conditions.</p>
 
