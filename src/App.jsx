@@ -4,6 +4,9 @@ import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import ListingSquare from "./listingSquare/ListingSquare";
+import Header from "./header/header";
+import Footer from "./footer/Footer";
+
 
 function App() {
   return (
@@ -11,14 +14,22 @@ function App() {
       <AuthProvider>
         <>
         <ListingSquare name="Hus" imageLink="bild" />
+        <div className="layout">
+          <Header /> 
+          
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+          
+          <Footer  />
+          </div>
         </>
       </AuthProvider>
     </BrowserRouter>
+  
   );
 }
 
