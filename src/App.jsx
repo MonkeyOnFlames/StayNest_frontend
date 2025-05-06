@@ -3,13 +3,14 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
-import Button from "./button/button";
+import ListingSquare from "./listingSquare/ListingSquare";
 
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <>
+        <ListingSquare name="Hus" imageLink="bild" />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
