@@ -1,5 +1,4 @@
-import Button from "../button/button";
-import Footer from "../footer/Footer";
+
 import "../home/home.css";
 
 const Home = ()=> {
@@ -14,7 +13,6 @@ const Home = ()=> {
             <h2>Filters</h2>
             <h2>Listings</h2>
           
-            <Footer  />
         </div>
     )
 }

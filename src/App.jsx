@@ -4,6 +4,7 @@ import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
+import Footer from "./footer/Footer";
 
 
 function App() {
@@ -12,15 +13,16 @@ function App() {
       <AuthProvider>
         <>
         <div className="layout">
-          <Header title="StayNest" /> 
+          <Header /> 
           
-          <Home />
           
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
+          
+          <Footer  />
           </div>
         </>
       </AuthProvider>
