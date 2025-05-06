@@ -7,29 +7,30 @@ import ListingSquare from "./listingSquare/ListingSquare";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
 
-
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <>
-        <ListingSquare name="Hus" imageLink="bild" />
-        <div className="layout">
-          <Header /> 
-          
-          
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-          
-          <Footer  />
+          <ListingSquare
+            name="Hus"
+            imageLink="bild"
+            environments={["SOLAR_POWER", "BIKE", "RECYCLE"]}
+          />
+          <div className="layout">
+            <Header />
+
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+
+            <Footer />
           </div>
         </>
       </AuthProvider>
     </BrowserRouter>
-  
   );
 }
 
