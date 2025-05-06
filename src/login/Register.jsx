@@ -39,14 +39,14 @@ const Register = () => {
       setError("");
 
       await register(
-        username,
-        password,
         firstName,
         lastName,
         email,
         phone,
         adress,
-        age
+        age,
+        username,
+        password
       );
       navigate("/");
     } catch (err) {

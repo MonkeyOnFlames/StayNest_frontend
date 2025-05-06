@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import "./auth.css";
 import Button from "../button/button";
@@ -68,6 +68,10 @@ const Login = () => {
           variant="auth"
           width="10"
         />
+
+        <Link className="link" to="../register">
+          <br></br>Register
+        </Link>
       </form>
     </div>
   );

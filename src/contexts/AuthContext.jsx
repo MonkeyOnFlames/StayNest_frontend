@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     lastName,
     email,
     phone,
-    address,
+    adress,
     age,
     username,
     password
@@ -105,7 +105,7 @@ export const AuthProvider = ({ children }) => {
         lastName,
         email,
         phone,
-        address,
+        adress,
         age,
         username,
         password,
