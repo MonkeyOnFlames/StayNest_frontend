@@ -12,22 +12,22 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <>
-        <div className="layout">
-          <Header /> 
-          
-          
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
-          
-          <Footer  />
+          <div className="layout">
+            <Header />
+
+            
+
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+
+            <Footer />
           </div>
         </>
       </AuthProvider>
     </BrowserRouter>
-  
   );
 }
 
