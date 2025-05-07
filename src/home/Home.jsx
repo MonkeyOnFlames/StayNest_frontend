@@ -1,6 +1,7 @@
 import "../home/home.css";
 import InfoSquare from "../infoSquare/InfoSquare";
 import image from "../image/StayNest.jpg";
+import ListingSquare from "../listingSquare/ListingSquare";
 
 const Home = () => {
   return (
@@ -29,11 +30,9 @@ const Home = () => {
         image={<img src={image} alt="StayNest Logo" />}
       />
 
-      <h1>StayNest</h1>
-      <h2>Intro</h2>
       <nav>Search bar</nav>
       <h2>Filters</h2>
-      <h2>Listings</h2>
+      <ListingSquare name="hest" imageLink={image} environments={["BIKE"]} />
     </div>
   );
 };

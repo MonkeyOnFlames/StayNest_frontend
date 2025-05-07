@@ -1,4 +1,4 @@
-.square {
+.listing-square {
   display: flex;
   height: 20rem;
   width: 20rem;
@@ -10,7 +10,7 @@
   padding: 0;
 }
 
-.image {
+.listing-image {
   display: flex;
   position: relative;
   height: 18rem;
@@ -20,7 +20,7 @@
   border-radius: 5px;
 }
 
-.bottom-container {
+.listing-bottom-container {
   display: flex;
   position: relative;
   height: 3rem;
@@ -29,7 +29,7 @@
   justify-content: space-between;
 }
 
-.environment-circle {
+.listing-environment-circle {
   display: flex;
   height: 2rem;
   width: 2rem;
@@ -40,7 +40,7 @@
   background-color: #b0b0b0;
 }
 
-.text-container {
+.listing-text-container {
   height: 3rem;
   width: 10rem;
   color: black;
