@@ -1,4 +1,4 @@
-.container {
+.auth-container {
   margin: 5rem 0rem;
   width: 40rem;
   display: flex;
@@ -11,7 +11,7 @@
   width: 20rem;
 }
 
-.button {
+.auth-button {
   text-align: center;
   width: 40 rem;
 }
