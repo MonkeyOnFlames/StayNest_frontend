@@ -17,7 +17,6 @@
   width: 18rem;
   top: 1rem;
   left: 1rem;
-  background-color: brown;
   border-radius: 5px;
 }
 
@@ -27,8 +26,7 @@
   height: 3rem;
   width: 20rem;
   border-radius: 5px;
-  background-color: blueviolet;
-  justify-content: space-between;   
+  justify-content: space-between;
 }
 
 .environment-circle {
@@ -45,5 +43,5 @@
 .text-container {
   height: 3rem;
   width: 10rem;
-  background-color: aqua;
+  color: black;
 }

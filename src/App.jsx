@@ -3,7 +3,6 @@ import Home from "./home/Home";
 import Login from "./login/Login";
 import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
-import ListingSquare from "./listingSquare/ListingSquare";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
 
@@ -12,11 +11,6 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <>
-          <ListingSquare
-            name="Hus"
-            imageLink="bild"
-            environments={["SOLAR_POWER", "BIKE", "RECYCLE"]}
-          />
           <div className="layout">
             <Header />
 
