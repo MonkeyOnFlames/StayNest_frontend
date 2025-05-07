@@ -6,7 +6,6 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -14,8 +13,6 @@ function App() {
         <>
           <div className="layout">
             <Header />
-
-            
 
             <Routes>
               <Route path="/" element={<Home />} />
