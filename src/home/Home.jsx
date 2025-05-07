@@ -1,5 +1,5 @@
 import "../home/home.css";
-import InfoSquare from "../../infoSquare/InfoSquare";
+import InfoSquare from "../infoSquare/InfoSquare";
 import image from "../image/StayNest.jpg";
 
 const Home = () => {
