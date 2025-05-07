@@ -7,7 +7,7 @@ const Searchbar = ({ input, filters, button }) => {
       {<div className="search-input">{input}</div>}
 
       {filters.map((filter) => (
-        <div className="search-filter" key={1}>
+        <div className="search-filter" key={filter.id}>
           {filter.icon}
           <div className="search-filter-text">
             <div>{filter.label}</div>
