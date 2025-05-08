@@ -5,12 +5,22 @@ import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
+import BookingSquare from "./bookingSquare/BookingSquare";
 
 function App() {
+  const checkIn = new Date("2025-05-01")
+  const checkOut = new Date("2025-12-31")
+  
+  const availability = {
+    startDate: checkIn,
+    endDate: checkOut
+  }
+
   return (
     <BrowserRouter>
       <AuthProvider>
         <>
+        <BookingSquare id="1" availabilities={[availability]} price={100} />
           <div className="layout">
             <Header />
 
