@@ -2,42 +2,74 @@ import "./bookingSquare.css";
 import Button from "../button/button";
 import { useState } from "react";
 
-function BookingSquare(id, availabilities, price) {
+const BookingSquare = ({ availabilities, price }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
+  const [nrOfGuests, setNrOfGuests] = useState("");
   const [error, setError] = useState("");
   let checkInDate = new Date(checkIn);
   let checkOutDate = new Date(checkOut);
+  let availabilityStartDate;
+  let availabilityEndDate;
+
+  //Found this when i search to calculate the days between dates, https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+  const daysBetween = (startDate, endDate) => {
+    // Convert dates to UTC timestamps
+    let startUtc = Date.UTC(
+      startDate.getFullYear(),
+      startDate.getMonth(),
+      startDate.getDate()
+    );
+    let endUtc = Date.UTC(
+      endDate.getFullYear(),
+      endDate.getMonth(),
+      endDate.getDate()
+    );
+
+    // Calculate the time difference in milliseconds
+    let timeDiff = Math.abs(endUtc - startUtc);
+
+    // Convert milliseconds to days
+    let daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    return daysDiff;
+  };
+
+  const totalPrice = (startDate, endDate, price) => {
+    if (daysBetween(startDate, endDate)) {
+      return daysBetween(startDate, endDate) * price;
+    } else {
+      return 0;
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     try {
-      if (!checkIn || !checkOut) {
-        throw new Error("Check-in and Check-out are required");
-      }
-
-      if (!checkInDate || !checkOutDate) {
-        throw new Error("You need to type in a date");
+      if (!checkIn || !checkOut || !nrOfGuests) {
+        throw new Error(
+          "Check-in, Check-out and Number of guests are required"
+        );
       }
 
       if (checkOutDate < checkInDate) {
         throw new Error("Check-out cannot be before check-in");
       }
 
-      
-
       let bookingAvailability = {
-        startDate: checkIn,
-        endDate: checkOut,
+        startDate: checkInDate,
+        endDate: checkOutDate,
       };
-      console.log(bookingAvailability)
-      console.log(availabilities)
+
       {
         availabilities.map((availability) => {
+          availabilityStartDate = new Date(availability.startDate);
+          availabilityEndDate = new Date(availability.endDate);
+
           if (
-            availability.startDate <= bookingAvailability.startDate &&
-            availability.endDate >= bookingAvailability.endDate
+            availabilityStartDate <= bookingAvailability.startDate &&
+            availabilityEndDate >= bookingAvailability.endDate
           ) {
           } else {
             throw new Error("Listing is not vaialable for those dates");
@@ -78,14 +110,25 @@ function BookingSquare(id, availabilities, price) {
             onChange={(e) => setCheckOut(e.target.value)}
           />
         </div>
-        <div className="nr-of-guests"></div>
+        <div className="nr-of-guests">
+          <label htmlFor="checkOut">
+            Number of guests<br></br>
+          </label>
+          <input
+            type="number"
+            placeholder="1"
+            value={nrOfGuests}
+            onChange={(e) => setNrOfGuests(e.target.value)}
+          />
+        </div>
         <p className="error-message">{error}</p>
         <Button text="Book now" type="submit" />
-        <div className="price-info"></div>
-        <div className="total-price"></div>
+        <div className="total-price">
+          Total price: {totalPrice(checkInDate, checkOutDate, price)}
+        </div>
       </form>
     </div>
   );
-}
+};
 
 export default BookingSquare;
