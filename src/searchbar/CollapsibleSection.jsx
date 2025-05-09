@@ -1,22 +1,23 @@
 import { useState } from "react";
 import "./searchbar.css";
 
-const CollapsibleSection = ({ title, children, defaultExpanded = false, floating = false }) => {
+const CollapsibleSection = ({ title, children, defaultExpanded = false }) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
 
+  //toke help from this site to make the dropdown menu outside of the searchbar:
+  //https://www.dhiwise.com/post/a-comprehensive-guide-to-building-a-react-dropdown-menu
   return (
-    //<div className="filter-section">
-      <div className={`section-header ${floating , ""}`} onClick={toggleExpanded} >
-        <p>{title}<span className={`arrow ${expanded ? "up" : "down"}`}>
+    <div className="section-header" onClick={toggleExpanded}>
+      <span className="collapsible-label">
+        {title}
+        <span className={`arrow ${expanded ? "up" : "down"}`}>
           {expanded ? "△" : "▽"}
-        </span></p>
-
-        
-      {/* </div> */}
+        </span>
+      </span>
 
       {expanded && <div className="section-content">{children}</div>}
     </div>

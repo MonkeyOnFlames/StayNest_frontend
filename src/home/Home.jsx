@@ -5,6 +5,8 @@ import ListingSquare from "../listingSquare/ListingSquare";
 import Searchbar from "../searchbar/Searchbar";
 import Button from "../button/button";
 
+import CollapsibleSection from "../searchbar/CollapsibleSection";
+
 const searchInput = (
   <input
     type="text"
@@ -18,22 +20,22 @@ const filters = [
   {
     icon: <div className="search-icon">i</div>,
     label: "Location",
-    value: "Sweden ▿",
+    value: <CollapsibleSection title="Sweden "><p>Norge</p><p>Stockholm</p></CollapsibleSection>,
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Listing Type",
-    value: "Residence ▿",
+    value: <CollapsibleSection title="Residence "><p>Garden</p><p>House</p></CollapsibleSection>,
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Check In",
-    value: "22 May 2025 ▿",
+    value: <CollapsibleSection title="22 May 2025 "><p>Many dates</p></CollapsibleSection>,
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Check Out",
-    value: "30 May 2025 ▿",
+    value: <CollapsibleSection title="30 May 2025 "><p>Many dates</p></CollapsibleSection>,
   },
 ];
 
@@ -62,6 +64,8 @@ const Home = () => {
         filters={filters}
         button={<Button text="Search" type="submit" width="10" />}
       />
+
+      
 
       <nav>Search bar</nav>
       <h2>Filters</h2>
