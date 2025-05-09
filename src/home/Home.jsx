@@ -14,29 +14,26 @@ const searchInput = (
 );
 
 const filters = [
+
   {
     icon: <div className="search-icon">i</div>,
     label: "Location",
     value: "Sweden ▿",
-    id: "1",
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Listing Type",
     value: "Residence ▿",
-    id: "2",
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Check In",
     value: "22 May 2025 ▿",
-    id: "3",
   },
   {
     icon: <div className="search-icon">i</div>,
     label: "Check Out",
     value: "30 May 2025 ▿",
-    id: "4",
   },
 ];
 

@@ -48,8 +48,86 @@
 .search-filter-text {
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .filter-value {
   margin-left: -30px;
+  cursor: pointer;
+  
+}
+
+.container {
+  position: relative;
+}
+
+
+/* collapsible sections */
+.arrow {
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.arrow.up {
+  transform: rotate(0deg);
+}
+
+.arrow.down {
+  transform: rotate(90deg);
+}
+
+/* .section-content {
+  margin-top: 12px;
+} */
+
+/* radio inputs */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+
+  /* gap: 8px; */
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+}
+
+.radio-item input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #888;
+  border-radius: 50%;
+  outline: none;
+  margin-right: 8px;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-item input[type="radio"]:checked {
+  border-color: black;
+}
+
+.radio-item input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.radio-item input[type="radio"]:focus {
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.radio-item label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
 }
