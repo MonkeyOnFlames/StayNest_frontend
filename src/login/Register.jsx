@@ -56,7 +56,7 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -153,7 +153,7 @@ const Register = () => {
         <p>By signing up you agree to our terms and conditions.</p>
 
         <Button
-          className="button"
+          className="auth-button"
           text="Register"
           type="submit"
           variant="auth"
