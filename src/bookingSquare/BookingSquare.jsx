@@ -12,7 +12,7 @@ const BookingSquare = ({ availabilities, price }) => {
   let availabilityStartDate;
   let availabilityEndDate;
 
-  //Found this when i search to calculate the days between dates, https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+  //Found this when i searched to calculate the days between dates, https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
   const daysBetween = (startDate, endDate) => {
     // Convert dates to UTC timestamps
     let startUtc = Date.UTC(
@@ -85,7 +85,7 @@ const BookingSquare = ({ availabilities, price }) => {
   };
 
   return (
-    <div>
+    <div className="booking-square">
       <form onSubmit={handleSubmit}>
         <h2>{price} / night</h2>
         <div className="check-in">
