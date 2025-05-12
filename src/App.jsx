@@ -14,16 +14,19 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <>
-          <div className="layout">
-            <Header />
+        <div className="layout">
+        
 
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </Routes>
-
-            <Footer />
+          <Header /> 
+          
+          
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+          
+          <Footer  />
           </div>
         </>
       </AuthProvider>
