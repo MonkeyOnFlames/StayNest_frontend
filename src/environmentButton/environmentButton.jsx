@@ -2,36 +2,34 @@ import "./environmentButton.css";
 
 const EnvironmentButton = ({environments}) => {
     return(
-  <button>
     <div className="enivronment-container">
       {environments.map((environment) =>
         environment === "BIKE" ? (
-          <div key={environment} className="env-button">
+          <button key={environment} className="env-button">
             Bike
-          </div>
+          </button>
         ) : environment === "CHARGE_POST" ? (
-          <div key={environment} className="env-button">
+          <button key={environment} className="env-button">
             Charge post
-          </div>
+          </button>
         ) : environment === "KWH" ? (
-          <div key={environment} className="env-button">
+          <button key={environment} className="env-button">
             Kwt
-          </div>
+          </button>
         ) : environment === "RECYCLE" ? (
-          <div key={environment} className="env-button">
+          <button key={environment} className="env-button">
             Recycle
-          </div>
+          </button>
         ) : environment === "SOLAR_POWER" ? (
-          <div key={environment} className="env-button">
+          <button key={environment} className="env-button">
             Solar power
-          </div>
+          </button>
         ) : (
           ""
         )
       )}
-      ;
+      
     </div>
-  </button>
   )
 };
 
