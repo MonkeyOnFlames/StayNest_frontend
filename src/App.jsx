@@ -22,8 +22,8 @@ function App() {
             "KWH",
             "RECYCLE",
             "SOLAR_POWER"
-          ]
-        }/>
+          ]}
+          />
           <Header /> 
           
           
