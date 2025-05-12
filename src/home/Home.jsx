@@ -13,23 +13,24 @@ const Home = () => {
             <h2 style={{ marginBottom: "0.5rem", fontWeight: 400 }}>
               Stay Nest
             </h2>
-            <h2 style={{ margin: 0, fontSize: "2.5rem", fontWeight: 700 }}>
+            <h2 style={{ margin: 0, fontSize: "2.5rem" }}>
               A eco-friendly and <br />
               welcoming stay <br />
-              for travelers
+              for travelers <br />
             </h2>
-            <p
-              style={{
-                marginTop: "1rem",
-                fontSize: "1rem",
-              }}
-            >
-              Every place feels like home
-            </p>
+            <p>Every place feels like home</p>
           </div>
         }
         image={<img src={image} alt="StayNest Logo" />}
       />
+
+      <Searchbar
+        input={searchInput}
+        filters={filters}
+        button={<Button text="Search" type="submit" width="10" />}
+      />
+
+      
 
       <nav>Search bar</nav>
       <EnvironmentButton 

@@ -8,6 +8,8 @@ import Footer from "./footer/Footer";
 
 
 function App() {
+
+
   return (
     <BrowserRouter>
       <AuthProvider>
