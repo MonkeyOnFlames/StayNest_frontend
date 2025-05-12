@@ -6,7 +6,10 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
 
+
 function App() {
+
+
   return (
     <BrowserRouter>
       <AuthProvider>
