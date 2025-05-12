@@ -17,13 +17,29 @@ function App() {
         <EnvironmentButton 
         environments={
           [
-            "BIKE",
-            "CHARGE_POST",
-            "KWH",
-            "RECYCLE",
-            "SOLAR_POWER"
-          ]}
-          />
+            "BIKE"]
+        }/>
+           <EnvironmentButton 
+        environments={
+          [
+            "CHARGE_POST"]
+        }/>
+             <EnvironmentButton 
+        environments={
+          [
+            "KWH"]
+        }/>
+             <EnvironmentButton 
+        environments={
+          [
+            "RECYCLE"]
+        }/>
+             <EnvironmentButton 
+        environments={
+          [
+            "SOLAR_POWER"]
+        }/>
+
           <Header /> 
           
           
