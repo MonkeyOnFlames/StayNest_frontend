@@ -5,7 +5,6 @@ import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
-import EnvironmentButton from "./environmentButton/environmentButton";
 
 
 function App() {
@@ -14,31 +13,7 @@ function App() {
       <AuthProvider>
         <>
         <div className="layout">
-        <EnvironmentButton 
-        environments={
-          [
-            "BIKE"]
-        }/>
-           <EnvironmentButton 
-        environments={
-          [
-            "CHARGE_POST"]
-        }/>
-             <EnvironmentButton 
-        environments={
-          [
-            "KWH"]
-        }/>
-             <EnvironmentButton 
-        environments={
-          [
-            "RECYCLE"]
-        }/>
-             <EnvironmentButton 
-        environments={
-          [
-            "SOLAR_POWER"]
-        }/>
+        
 
           <Header /> 
           
@@ -54,7 +29,6 @@ function App() {
         </>
       </AuthProvider>
     </BrowserRouter>
-  
   );
 }
 
