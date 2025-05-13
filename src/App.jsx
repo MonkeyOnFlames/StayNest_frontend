@@ -5,15 +5,6 @@ import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
-import BookingSquare from "./bookingSquare/BookingSquare";
-
-const checkIn = "2025-05-01";
-const checkOut = "2025-12-31";
-
-  const availability = {
-    startDate: checkIn,
-    endDate: checkOut,
-  };
 
 function App() {
 
@@ -26,8 +17,6 @@ function App() {
         
 
           <Header /> 
-          
-          <BookingSquare price={1000} availabilities={[availability]}/>
           
           <Routes>
             <Route path="/" element={<Home />} />
