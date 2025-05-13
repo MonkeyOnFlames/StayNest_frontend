@@ -1,24 +1,33 @@
 .info-container {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   /*grid-template-rows: 33px 33px;*/
-  grid-template-areas: "info logo";
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-areas: "info-info info-image";
+  /* gap: 1rem; */
+  padding: 0rem 5rem 1rem;
+  color: white;
 
   background-color: #888888;
 }
 
 .info-image {
+  grid-area: info-image;
   max-width: 100%;
   max-height: 100%;
   display: flex;
-  align-items: right;
+  align-items: center;
   justify-content: center;
+  /* background-color: black; */
 }
 
-/* .info-info {
-  font-family: "Poppins", sans-serif;
+.info-info {
+  /* width: fit-content; */
+  grid-area: info-info;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: black; */
 }
- */
