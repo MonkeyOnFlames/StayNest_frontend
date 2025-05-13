@@ -1,15 +1,15 @@
 .search-container {
   background-color: #efefef;
   color: black;
-  margin: 0rem 5%;
-  width: 83%;
+  margin: 0rem 20%;
+  width: 90rem;
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-items: center;
   height: fit-content;
   padding: 10px /* 10px */;
-  gap: 0rem;
+/*   gap: 0rem; */
 
   position: relative;
   overflow: visible;
