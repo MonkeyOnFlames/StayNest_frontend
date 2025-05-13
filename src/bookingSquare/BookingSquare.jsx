@@ -36,8 +36,12 @@ const BookingSquare = ({ availabilities, price }) => {
   };
 
   const totalPrice = (startDate, endDate, price) => {
-    if (daysBetween(startDate, endDate)) {
-      return daysBetween(startDate, endDate) * price;
+    if (
+      daysBetween(startDate, endDate) &&
+      checkOut.trim().length === 10 &&
+      checkIn.trim().length === 10
+    ) {
+      return (daysBetween(startDate, endDate) + 1) * price;
     } else {
       return 0;
     }
@@ -74,10 +78,14 @@ const BookingSquare = ({ availabilities, price }) => {
           } else {
             throw new Error("Listing is not vaialable for those dates");
           }
-
-          setError("");
         });
       }
+
+      if (checkInDate < new Date()) {
+        throw new Error("You cannot book today or in the past");
+      }
+
+      setError("");
     } catch (err) {
       setError(err.message);
       console.log("error: " + err);
@@ -93,6 +101,7 @@ const BookingSquare = ({ availabilities, price }) => {
             Check-In<br></br>
           </label>
           <input
+            className="booking-input"
             type="text"
             placeholder="2025-01-01"
             value={checkIn}
@@ -104,6 +113,7 @@ const BookingSquare = ({ availabilities, price }) => {
             Check-Out<br></br>
           </label>
           <input
+            className="booking-input"
             type="text"
             placeholder="2025-01-02"
             value={checkOut}
@@ -115,6 +125,7 @@ const BookingSquare = ({ availabilities, price }) => {
             Number of guests<br></br>
           </label>
           <input
+            className="booking-input"
             type="number"
             placeholder="1"
             value={nrOfGuests}
