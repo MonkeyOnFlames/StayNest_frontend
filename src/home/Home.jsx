@@ -82,8 +82,7 @@ const Home = () => {
         button={<Button text="Search" type="submit" width="10" />}
       />
 
-      <nav>Search bar</nav>
-      <EnvironmentButton environments={["BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
+       <EnvironmentButton environments={["BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
 
       <ListingSquare name="hest" imageLink={image} environments={["BIKE"]} />
     </div>
