@@ -9,7 +9,7 @@
   align-items: center;
   height: fit-content;
   padding: 10px /* 10px */;
-  gap: 4rem;
+  gap: 0rem;
 
   position: relative;
   overflow: visible;
@@ -24,7 +24,7 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 7px;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
 
   position: relative;
   overflow: visible;
