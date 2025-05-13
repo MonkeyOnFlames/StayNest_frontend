@@ -10,17 +10,18 @@ const Header = () => {
       <nav>
         <div className="logo-container">
           <Link className="link" to="/">
-            <img src={image} alt="StayNest logo" />
+            <img src={image} id="headerimg" alt="StayNest logo" />
           </Link>
         </div>
-
-        <Link className="link" to="/login">
+        <div className="linkButton">
+        <Link className="linkLogin" to="/login">
           <Button text="Login" />
         </Link>
         
-        <Link className="link" to="/register">
+        <Link className="linkRegister" to="/register">
           <Button text="Register" />
         </Link>
+        </div>
       </nav>
     </header>
   );
