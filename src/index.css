@@ -12,3 +12,15 @@ body {
   font-size: 18px;
   overflow-x: hidden;
 }
+
+input {
+  height: 3rem;
+  width: 14rem;
+  border-radius: 8px;
+  border: #efefef;
+  background-color: white;
+  color: black;
+  font-size: 19px;
+  text-align: justify;
+  padding-left: 12px;
+}
