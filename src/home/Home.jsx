@@ -6,6 +6,8 @@ import EnvironmentButton from "../environmentButton/environmentButton";
 import Searchbar from "../searchbar/Searchbar";
 import CollapsibleSection from "../searchbar/CollapsibleSection";
 import Button from "../button/button";
+import { getAllListings } from "../api/listingService";
+import { useState, useEffect } from "react";
 
 const searchInput = (
   <input
@@ -57,6 +59,27 @@ const filters = [
 ];
 
 const Home = () => {
+  const [listings, setListings] = useState([]);
+  const [filteredListings, setFilteredListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const data = await getAllListings();
+        setListings(data);
+        setFilteredListings(data);
+      } catch (err) {
+        console.log("Error " + err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+
   return (
     <div className="home">
       <InfoSquare
@@ -82,9 +105,12 @@ const Home = () => {
         button={<Button text="Search" type="submit" width="10" />}
       />
 
-       <EnvironmentButton environments={["BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
+       <EnvironmentButton environmentFilters={["ANY", "BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
 
-      <ListingSquare name="hest" imageLink={image} environments={["BIKE"]} />
+      {listings.map((listing) => 
+      <ListingSquare key={listing.id} name={listing.name} imageLinks={listing.pictureURLs} environments={listing.environments} />
+      )}
+      
     </div>
   );
 };

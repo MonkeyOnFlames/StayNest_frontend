@@ -1,19 +1,22 @@
 import "./listing-square.css";
 
-function ListingSquare({ name, imageLink, onClick, environments }) {
+function ListingSquare({ name, imageLinks, onClick, environments }) {
+  let shownImage = imageLinks[0];
+
   return (
     <button className="listing-square" onClick={onClick}>
       <div
         className="listing-image"
         style={{
-          backgroundImage: `url(${imageLink})`,
+          backgroundImage: `url(${shownImage})`,
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
         }}
       ></div>
 
       <div className="listing-bottom-container">
-        {environments.map((environment) =>
+        
+        {/* {environments.map((environment) =>
           environment === "BIKE" ? (
             <div key={1} className="listing-environment-circle">
               B
@@ -37,7 +40,7 @@ function ListingSquare({ name, imageLink, onClick, environments }) {
           ) : (
             ""
           )
-        )}
+        )} */}
 
         <div className="listing-text-container">
           <p>{name}</p>
