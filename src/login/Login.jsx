@@ -41,6 +41,7 @@ const Login = () => {
             Username<br></br>
           </label>
           <input
+          className="auth-input"
             type="text"
             placeholder="Enter your username"
             value={username}
@@ -52,6 +53,7 @@ const Login = () => {
             Password<br></br>
           </label>
           <input
+          className="auth-input"
             type="password"
             placeholder="6 + characters"
             value={password}

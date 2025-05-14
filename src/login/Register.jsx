@@ -64,6 +64,7 @@ const Register = () => {
             First name<br></br>
           </label>
           <input
+            className="auth-input"
             type="text"
             value={firstName}
             placeholder="Enter your first name"
@@ -75,6 +76,7 @@ const Register = () => {
             Last name<br></br>
           </label>
           <input
+            className="auth-input"
             type="text"
             value={lastName}
             placeholder="Enter your last name"
@@ -86,6 +88,7 @@ const Register = () => {
             E-mail<br></br>
           </label>
           <input
+            className="auth-input"
             type="email"
             value={email}
             placeholder="name@mail.com"
@@ -97,6 +100,7 @@ const Register = () => {
             Phone No<br></br>
           </label>
           <input
+            className="auth-input"
             type="number"
             value={phone}
             placeholder="With country code"
@@ -108,6 +112,7 @@ const Register = () => {
             Address<br></br>
           </label>
           <input
+            className="auth-input"
             type="text"
             value={adress}
             placeholder="Enter your address"
@@ -119,6 +124,7 @@ const Register = () => {
             Age<br></br>
           </label>
           <input
+            className="auth-input"
             type="number"
             value={age}
             placeholder="Enter your age"
@@ -130,6 +136,7 @@ const Register = () => {
             Username<br></br>
           </label>
           <input
+            className="auth-input"
             type="text"
             value={username}
             placeholder="Enter your username"
@@ -141,6 +148,7 @@ const Register = () => {
             Password<br></br>
           </label>
           <input
+            className="auth-input"
             type="password"
             value={password}
             placeholder="6 + characters"
