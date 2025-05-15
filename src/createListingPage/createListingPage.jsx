@@ -1,24 +1,54 @@
 import "../login/auth.css";
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import Button from "../button/button";
+import { createListing } from "../api/listingService";
+import CheckBox from "../checkBox/CheckBox";
 
 const CreateListingPage = () => {
   const [listingName, setListingName] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [listingTypes, setListingTypes] = useState("");
+  const [listingTypes, setListingTypes] = useState(["RESIDENCE", "SITE"]);
   const [listingPolicy, setListingPolicy] = useState("");
-  const [environment, setEnvironment] = useState("");
-  const [restrictions, setRestrictions] = useState("");
-  const [pictureURLs, setPictureURLs] = useState("");
-  const [availabilities, setAvailabilities] = useState("");
+  const [environmentList, setEnvironmentList] = useState([
+    "KWH",
+    "CHARGE_POST",
+    "RECYCLE",
+    "BIKE",
+    "SOLAR_POWER",
+  ]);
+  const [environment, setEnvironment] = useState([]);
+  const [restrictionList, setRestrictionList] = useState([
+    "PETS",
+    "DISABILITY",
+    "MIN_AGE",
+    "MAX_RENTER",
+  ]);
+  const [restriction, setRestriction] = useState([]);
+  const [pictureURL, setPictureURL] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
   // konsumerar contexten
-  const { register } = useAuth();
+  // const { createListing } = createListing();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let availability = {
+      startDate: startDate,
+      endDate: endDate,
+    };
+
+    let availabilities = [availability];
+
+    let pictures = [];
+
+    const pictureURLs = pictures.add(pictureURL);
 
     try {
       if (
@@ -28,10 +58,13 @@ const CreateListingPage = () => {
         !price ||
         !listingTypes ||
         !listingPolicy ||
-        !pictureURLs ||
-        !availabilities
+        !pictureURL ||
+        !startDate ||
+        !endDate
       ) {
-        throw new Error("All fields except environment and restrictions are required");
+        throw new Error(
+          "All fields except environment and restrictions are required"
+        );
       }
 
       setError("");
@@ -55,6 +88,18 @@ const CreateListingPage = () => {
     }
   };
 
+  const handleEnvironmentSelect = (box) => {
+    let tempEnvironments = [];
+    tempEnvironments.add(box);
+    setEnvironment(tempEnvironments);
+  };
+
+  const handleRestrictionSelect = (box) => {
+    let tempRestrctions = [];
+    tempRestrctions.add(box);
+    setEnvironment(tempRestrctions);
+  };
+
   return (
     <div className="auth-container">
       <h2>Create Listing</h2>
@@ -67,8 +112,8 @@ const CreateListingPage = () => {
             className="auth-input"
             type="text"
             value={listingName}
-            placeholder="Enter the name of your listing"
-            onChange={(e) => setLstingName(e.target.value)}
+            placeholder="Name of your listing"
+            onChange={(e) => setListingName(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -79,7 +124,7 @@ const CreateListingPage = () => {
             className="auth-input"
             type="text"
             value={location}
-            placeholder="Enter your listings location"
+            placeholder="Listings location"
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
@@ -91,7 +136,7 @@ const CreateListingPage = () => {
             className="auth-input"
             type="text"
             value={description}
-            placeholder="name@mail.com"
+            placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
@@ -103,7 +148,7 @@ const CreateListingPage = () => {
             className="auth-input"
             type="number"
             value={price}
-            placeholder="With country code"
+            placeholder="Price in SEK"
             onChange={(e) => setPrice(e.target.value)}
           />
         </div>
@@ -111,60 +156,79 @@ const CreateListingPage = () => {
           <label htmlFor="listingTypes">
             Listing Type<br></br>
           </label>
+          <label htmlFor="listingTypes">Residence</label>
           <input
             type="radio"
             name="Residence"
-            checked = {listingTypes}
-            onChange={(e) => setListingTypes(e.target.value)}
+            onClick={() => setListingTypes("RESIDENCE")}
           />
+          <label htmlFor="listingTypes">Site</label>
           <input
             type="radio"
             name="Site"
-            checked = {listingTypes}
-            onChange={(e) => setListingTypes(e.target.value)}
+            onClick={() => setListingTypes("SITE")}
           />
         </div>
-
-
+        <br></br>
         <div className="form-group">
-          <label htmlFor="age">
-            Age<br></br>
-          </label>
-          <input
-            className="auth-input"
-            type="number"
-            value={age}
-            placeholder="Enter your age"
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="username">
-            Username<br></br>
+          <label htmlFor="listingPolicy">
+            Listing Policy<br></br>
           </label>
           <input
             className="auth-input"
             type="text"
-            value={username}
-            placeholder="Enter your username"
-            onChange={(e) => setUsername(e.target.value)}
+            value={listingPolicy}
+            placeholder="Enter your policy"
+            onChange={(e) => setListingPolicy(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">
-            Password<br></br>
+          <CheckBox
+            boxName="Environments"
+            onSelect={handleEnvironmentSelect}
+            availableBoxes={environmentList}
+          />
+        </div>
+        <div className="form-group">
+        <CheckBox
+            boxName="Restrictions"
+            onSelect={handleRestrictionSelect}
+            availableBoxes={restrictionList}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="pictureURLs">
+            Picture links<br></br>
           </label>
           <input
             className="auth-input"
-            type="password"
-            value={password}
-            placeholder="6 + characters"
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            value={pictureURL}
+            placeholder="Link"
+            onChange={(e) => setPictureURL(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="availabilities">
+            Start and end date for the availability<br></br>
+          </label>
+          <input
+            className="auth-input"
+            type="text"
+            value={startDate}
+            placeholder="Start Date"
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+          <input
+            className="auth-input"
+            type="text"
+            value={endDate}
+            placeholder="Start Date"
+            onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
 
         <p className="error-message">{error}</p>
-
 
         <Button
           className="auth-button"
@@ -173,7 +237,6 @@ const CreateListingPage = () => {
           variant="auth"
           width="10"
         />
-
       </form>
     </div>
   );
