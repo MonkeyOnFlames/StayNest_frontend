@@ -1,15 +1,17 @@
 import "../login/auth.css";
+import { useState, useEffect } from "react";
 
-const createListingPage = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [adress, setAdress] = useState("");
-  const [age, setAge] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+const CreateListingPage = () => {
+  const [listingName, setListingName] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [listingTypes, setListingTypes] = useState("");
+  const [listingPolicy, setListingPolicy] = useState("");
+  const [environment, setEnvironment] = useState("");
+  const [restrictions, setRestrictions] = useState("");
+  const [pictureURLs, setPictureURLs] = useState("");
+  const [availabilities, setAvailabilities] = useState("");
 
   const navigate = useNavigate();
   // konsumerar contexten
@@ -20,29 +22,31 @@ const createListingPage = () => {
 
     try {
       if (
-        !firstName ||
-        !lastName ||
-        !email ||
-        !phone ||
-        !adress ||
-        !age ||
-        !username ||
-        !password
+        !listingName ||
+        !location ||
+        !description ||
+        !price ||
+        !listingTypes ||
+        !listingPolicy ||
+        !pictureURLs ||
+        !availabilities
       ) {
-        throw new Error("All fields are required");
+        throw new Error("All fields except environment and restrictions are required");
       }
 
       setError("");
 
-      await register(
-        firstName,
-        lastName,
-        email,
-        phone,
-        adress,
-        age,
-        username,
-        password
+      await createListing(
+        listingName,
+        location,
+        description,
+        price,
+        listingTypes,
+        listingPolicy,
+        environment,
+        restrictions,
+        pictureURLs,
+        availabilities
       );
       navigate("/");
     } catch (err) {
@@ -108,13 +112,20 @@ const createListingPage = () => {
             Listing Type<br></br>
           </label>
           <input
-            className="auth-input"
-            type="text"
-            value={listingTypes}
-            placeholder="Enter your address"
+            type="radio"
+            name="Residence"
+            checked = {listingTypes}
+            onChange={(e) => setListingTypes(e.target.value)}
+          />
+          <input
+            type="radio"
+            name="Site"
+            checked = {listingTypes}
             onChange={(e) => setListingTypes(e.target.value)}
           />
         </div>
+
+
         <div className="form-group">
           <label htmlFor="age">
             Age<br></br>
@@ -168,4 +179,4 @@ const createListingPage = () => {
   );
 };
 
-export default createListingPage;
+export default CreateListingPage;
