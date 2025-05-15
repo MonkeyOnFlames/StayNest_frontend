@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+/* import { useState, useEffect } from "react"; */
 import Searchbar from "../searchbar/Searchbar";
 import InfoSquare from "../infoSquare/InfoSquare";
 import image from "../image/StayNest.jpg";
@@ -10,7 +10,21 @@ const listing = getListingById(id);
 
 
 const SpecificListingPage = () => {
-    const [listing, setListing] = useState([])
+
+/*   const navigate = useNavigate();
+  // konsumerar contexten
+  const { id } = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await id(username, password);
+      navigate("/");
+    } catch (err) {
+      console.log("error: " + err);
+    }
+  }; */
 
 
   const filters = [
