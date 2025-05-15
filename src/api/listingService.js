@@ -12,7 +12,7 @@ export const getAllListings = async () => {
 
 export const getListingById = async (id) => {
     try {
-      const response = await api.get(`/listings/${id}`);
+      const response = await api.get(`/api/listings/${id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching listing:", error);
@@ -22,7 +22,7 @@ export const getListingById = async (id) => {
 
   export const getListingsByEnvironment = async () => {
     try {
-      const response = await api.get("/listings/environments");
+      const response = await api.get("/api/listings/environments");
       return response.data;
     } catch (error) {
       console.error("Error fetching listing:", error);
@@ -32,7 +32,7 @@ export const getListingById = async (id) => {
 
   export const getListingBySpecificEnvironment = async (environment) => {
     try {
-      const response = await api.get(`/listings/${environment}/specific`);
+      const response = await api.get(`/api/listings/${environment}/specific`);
       return response.data;
     } catch (error) {
       console.error("Error fetching listing:", error);
@@ -42,7 +42,7 @@ export const getListingById = async (id) => {
 
   export const deleteListingById = async (id) => {
     try {
-      const response = await api.delete(`/listings/${id}`);
+      const response = await api.delete(`/api/listings/${id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching listing:", error);
@@ -52,7 +52,7 @@ export const getListingById = async (id) => {
 
   export const getListingByPriceRange = async (minPrice, maxPrice) => {
     try {
-      const response = await api.get(`/listings/price?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+      const response = await api.get(`/api/listings/price?minPrice=${minPrice}&maxPrice=${maxPrice}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching listing:", error);

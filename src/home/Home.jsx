@@ -108,7 +108,7 @@ const Home = () => {
        <EnvironmentButton environmentFilters={["ANY", "BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
 
       {listings.map((listing) => 
-      <ListingSquare key={listing.id} name={listing.name} imageLinks={listing.pictureURLs} environments={listing.environments} />
+      <ListingSquare key={listing.id} name={listing.name} imageLinks={listing.pictureURLs} environments={listing.environment} />
       )}
       
     </div>
