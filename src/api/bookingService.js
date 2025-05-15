@@ -1,10 +1,8 @@
 import api from "./axios";
 
-
-
 export const getBookingById = async (id) => {
   try {
-    const response = await api.get(`/bookings/${id}`);
+    const response = await api.get(`/api/bookings/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error:", error);
@@ -13,41 +11,28 @@ export const getBookingById = async (id) => {
 };
 
 export const deleteBooking = async (id) => {
-    try {
-      const response = await api.delete(`/bookings/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
-    }
-  };
+  try {
+    const response = await api.delete(`/api/bookings/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
 
-/*   const create = async (
+export const createBooking = async (listingId, totalAmount, startDate, endDate) => {
+  try {
+    const response  = await api.post("/api/bookings", {
       listingId,
-      listingName,
-      userId,
-      userName,
       totalAmount,
       startDate,
       endDate,
-      createdAt
-    ) => {
-      try {
-        const create = await api.post("/auth/bookings", {
-        listingId,
-        listingName,
-        userId,
-        userName,
-        totalAmount,
-        startDate,
-        endDate,
-        createdAt,
-        });
-        return response.data;
-      } catch (error) {
-        console.error("Register error:", error.response?.data || error.message);
-        throw new Error(
-          error.response?.data?.message || "Create failed, try again"
-        );
-      }
-    }; */
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Register error:", error.response?.data || error.message);
+    throw new Error(
+      error.response?.data?.message || "Create failed, try again"
+    );
+  }
+};
