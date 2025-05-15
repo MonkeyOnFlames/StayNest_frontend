@@ -44,8 +44,19 @@ export const getUserBookings = async (id) => {
     }
   };
 
-    // delete a user by id
-export const deleteUserById = async (id) => {
+    // update a user
+export const updateUser = async (id) => {
+    try {
+      const response = await api.patch(`/api/users/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      throw error;
+    }
+  };
+
+      // delete a user
+export const deleteUser = async (id) => {
     try {
       const response = await api.delete(`/api/users/${id}`);
       return response.data;
