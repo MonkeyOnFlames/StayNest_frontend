@@ -20,11 +20,10 @@ export const deleteBooking = async (id) => {
   }
 };
 
-export const createBooking = async (listingId, totalAmount, startDate, endDate) => {
+export const createBooking = async (listingId, startDate, endDate) => {
   try {
     const response  = await api.post("/api/bookings", {
       listingId,
-      totalAmount,
       startDate,
       endDate,
     });
