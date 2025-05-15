@@ -6,11 +6,12 @@ import { createListing } from "../api/listingService";
 import CheckBox from "../checkBox/CheckBox";
 
 const CreateListingPage = () => {
-  const [listingName, setListingName] = useState("");
+  const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [listingTypes, setListingTypes] = useState(["RESIDENCE", "SITE"]);
+  const [listingTypeList, setListingTypeList] = useState(["RESIDENCE", "SITE"]);
+  const [listingTypes, setListingTypes] = useState([]);
   const [listingPolicy, setListingPolicy] = useState("");
   const [environmentList, setEnvironmentList] = useState([
     "KWH",
@@ -26,8 +27,8 @@ const CreateListingPage = () => {
     "MIN_AGE",
     "MAX_RENTER",
   ]);
-  const [restriction, setRestriction] = useState([]);
-  const [pictureURL, setPictureURL] = useState("");
+  const [restrictions, setRestrictions] = useState([]);
+  const [pictureURL, setPictureURL] = useState([]);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [error, setError] = useState("");
@@ -48,11 +49,11 @@ const CreateListingPage = () => {
 
     let pictures = [];
 
-    const pictureURLs = pictures.add(pictureURL);
+    const pictureURLs = pictures.push(pictureURL);
 
     try {
       if (
-        !listingName ||
+        !name ||
         !location ||
         !description ||
         !price ||
@@ -70,7 +71,7 @@ const CreateListingPage = () => {
       setError("");
 
       await createListing(
-        listingName,
+        name,
         location,
         description,
         price,
@@ -88,16 +89,25 @@ const CreateListingPage = () => {
     }
   };
 
+  let tempListingType = [];
+
+  const handleListingTypeSelect = (box) => {
+    tempListingType.push(box);
+    setListingTypes(tempListingType);
+  };
+
+  let tempEnvironments = [];
+
   const handleEnvironmentSelect = (box) => {
-    let tempEnvironments = [];
-    tempEnvironments.add(box);
+    tempEnvironments.push(box);
     setEnvironment(tempEnvironments);
   };
 
+  let tempRestrctions = [];
+
   const handleRestrictionSelect = (box) => {
-    let tempRestrctions = [];
-    tempRestrctions.add(box);
-    setEnvironment(tempRestrctions);
+    tempRestrctions.push(box);
+    setRestrictions(tempRestrctions);
   };
 
   return (
@@ -111,9 +121,9 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={listingName}
+            value={name}
             placeholder="Name of your listing"
-            onChange={(e) => setListingName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -153,23 +163,12 @@ const CreateListingPage = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="listingTypes">
-            Listing Type<br></br>
-          </label>
-          <label htmlFor="listingTypes">Residence</label>
-          <input
-            type="radio"
-            name="Residence"
-            onClick={() => setListingTypes("RESIDENCE")}
-          />
-          <label htmlFor="listingTypes">Site</label>
-          <input
-            type="radio"
-            name="Site"
-            onClick={() => setListingTypes("SITE")}
+          <CheckBox
+            boxName="Listing Type"
+            onSelect={handleListingTypeSelect}
+            availableBoxes={listingTypeList}
           />
         </div>
-        <br></br>
         <div className="form-group">
           <label htmlFor="listingPolicy">
             Listing Policy<br></br>
@@ -190,7 +189,7 @@ const CreateListingPage = () => {
           />
         </div>
         <div className="form-group">
-        <CheckBox
+          <CheckBox
             boxName="Restrictions"
             onSelect={handleRestrictionSelect}
             availableBoxes={restrictionList}
@@ -214,16 +213,16 @@ const CreateListingPage = () => {
           </label>
           <input
             className="auth-input"
-            type="text"
+            type="date"
             value={startDate}
             placeholder="Start Date"
             onChange={(e) => setStartDate(e.target.value)}
           />
           <input
             className="auth-input"
-            type="text"
+            type="date"
             value={endDate}
-            placeholder="Start Date"
+            placeholder="End Date"
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>

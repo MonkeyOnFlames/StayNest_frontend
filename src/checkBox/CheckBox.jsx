@@ -12,10 +12,9 @@ const CheckBox = ({ boxName, selectedBox, onSelect, availableBoxes }) => {
       <div className="box-buttons">
         {availableBoxes.map((box) => (
           <button
+            type="button"
             key={box}
-            className={`box-button ${
-              selectedBox === box ? "selected" : ""
-            } `}
+            className={`box-button ${selectedBox === box ? ":selected" : ""} `}
             onClick={() => onSelect(box)}
           >
             {box}
