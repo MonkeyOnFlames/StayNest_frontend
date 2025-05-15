@@ -51,3 +51,10 @@
   font-size: 1rem;
 }
 
+.environment-circle-container {
+  height: 3rem;
+  width: 10rem;
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+}
