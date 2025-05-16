@@ -1,115 +1,117 @@
 import "../login/auth.css";
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import Button from "../button/button";
 import { createListing } from "../api/listingService";
 import CheckBox from "../checkBox/CheckBox";
 
 const CreateListingPage = () => {
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [listingTypeList, setListingTypeList] = useState(["RESIDENCE", "SITE"]);
-  const [listingTypes, setListingTypes] = useState([]);
-  const [listingPolicy, setListingPolicy] = useState("");
-  const [environmentList, setEnvironmentList] = useState([
-    "KWH",
-    "CHARGE_POST",
-    "RECYCLE",
-    "BIKE",
-    "SOLAR_POWER",
-  ]);
-  const [environment, setEnvironment] = useState([]);
-  const [restrictionList, setRestrictionList] = useState([
-    "PETS",
-    "DISABILITY",
-    "MIN_AGE",
-    "MAX_RENTER",
-  ]);
-  const [restrictions, setRestrictions] = useState([]);
-  const [pictureURL, setPictureURL] = useState([]);
+  const [listing, setListing] = useState({
+    name: "",
+    location: "",
+    description: "",
+    price: "",
+    listingTypes: [],
+    listingPolicy: "",
+    environment: [],
+    restrictions: [],
+    pictureURLs: [],
+    availabilities: [
+      {
+        startDate: "",
+        endDate: "",
+      },
+    ],
+  });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
-  // konsumerar contexten
-  // const { createListing } = createListing();
+  
+
+  // dynamig onChange metod som kan hantera varje property i objektet som INTE är en array
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setListing((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+    if (
+      !listing.name ||
+      !listing.location ||
+      !listing.description ||
+      !listing.price ||
+      !listing.listingTypes ||
+      !listing.listingPolicy ||
+      !listing.pictureURLs ||
+      !startDate ||
+      !endDate
+    ) {
+      throw new Error(
+        "All fields except environment and restrictions are required"
+      );
+    }
 
+    setError("");
+
+    await createListing(listing);
+    navigate("/");
+  } catch (err) {
+    setError(err.message);
+    console.log("error: " + err);
+  }
+    // här skriver du kod för att skicka till API:et
+    console.log(listing);
+  };
+
+  // för mer komplexa fält som arrays (listingTypes, environment, restrictions, pictureURLs)
+  // och nested objects (availabilities) behöver du special onChange metod:
+
+  // för arrayer:
+  const handleArrayChange = (arrayName, newArray) => {
+    setListing((prev) => ({
+      ...prev,
+      [arrayName]: newArray,
+    }));
+  };
+
+  // för array med objekt (availavilities):
+  const handleAvailabilityChange = (newAvailabilities) => {
+    setListing((prev) => ({
+      ...prev,
+      availabilities: newAvailabilities,
+    }));
+
+    const handleArrayOptionToggle = (arrayName, option) => {
+      const currentArray = [...listing[arrayName]];
+
+      // om option redan finns, ta bort den, annars lägg till den
+      if (currentArray.includes(option)) {
+        const updatedArray = currentArray.filter((item) => item !== option);
+        setListing({
+          ...listing,
+          [arrayName]: updatedArray,
+        });
+      } else {
+        setListing({
+          ...listing,
+          [arrayName]: [...currentArray, option],
+        });
+      }
+    };
     let availability = {
       startDate: startDate,
       endDate: endDate,
     };
 
-    let availabilities = [availability];
+    let tempAvailabilities = [availability];
 
-    let pictures = [];
-
-    const pictureURLs = pictures.push(pictureURL);
-
-    try {
-      if (
-        !name ||
-        !location ||
-        !description ||
-        !price ||
-        !listingTypes ||
-        !listingPolicy ||
-        !pictureURL ||
-        !startDate ||
-        !endDate
-      ) {
-        throw new Error(
-          "All fields except environment and restrictions are required"
-        );
-      }
-
-      setError("");
-
-      await createListing(
-        name,
-        location,
-        description,
-        price,
-        listingTypes,
-        listingPolicy,
-        environment,
-        restrictions,
-        pictureURLs,
-        availabilities
-      );
-      navigate("/");
-    } catch (err) {
-      setError(err.message);
-      console.log("error: " + err);
-    }
+    handleAvailabilityChange(tempAvailabilities);
   };
-
-  let tempListingType = [];
-
-  const handleListingTypeSelect = (box) => {
-    tempListingType.push(box);
-    setListingTypes(tempListingType);
-  };
-
-  let tempEnvironments = [];
-
-  const handleEnvironmentSelect = (box) => {
-    tempEnvironments.push(box);
-    setEnvironment(tempEnvironments);
-  };
-
-  let tempRestrctions = [];
-
-  const handleRestrictionSelect = (box) => {
-    tempRestrctions.push(box);
-    setRestrictions(tempRestrctions);
-  };
-
   return (
     <div className="auth-container">
       <h2>Create Listing</h2>
@@ -121,9 +123,10 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={name}
+            name="name"
+            value={listing.name}
             placeholder="Name of your listing"
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -133,9 +136,10 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={location}
+            name="location"
+            value={listing.location}
             placeholder="Listings location"
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -145,9 +149,10 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={description}
+            name="description"
+            value={listing.description}
             placeholder="Description"
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -157,16 +162,20 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="number"
-            value={price}
+            name="price"
+            value={listing.price}
             placeholder="Price in SEK"
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
           <CheckBox
             boxName="Listing Type"
-            onSelect={handleListingTypeSelect}
-            availableBoxes={listingTypeList}
+            selectedBox={listing.listingTypes}
+            onSelect={(option) =>
+              handleArrayOptionToggle("listingTypes", option)
+            }
+            availableBoxes={["RESIDENCE", "SITE"]}
           />
         </div>
         <div className="form-group">
@@ -176,23 +185,36 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={listingPolicy}
+            name="listingPolicy"
+            value={listing.listingPolicy}
             placeholder="Enter your policy"
-            onChange={(e) => setListingPolicy(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
           <CheckBox
             boxName="Environments"
-            onSelect={handleEnvironmentSelect}
-            availableBoxes={environmentList}
+            selectedBox={listing.environment}
+            onSelect={(option) =>
+              handleArrayOptionToggle("environment", option)
+            }
+            availableBoxes={[
+              "KWH",
+              "CHARGE_POST",
+              "RECYCLE",
+              "BIKE",
+              "SOLAR_POWER",
+            ]}
           />
         </div>
         <div className="form-group">
           <CheckBox
             boxName="Restrictions"
-            onSelect={handleRestrictionSelect}
-            availableBoxes={restrictionList}
+            selectedBox={listing.restrictions}
+            onSelect={(option) =>
+              handleArrayOptionToggle("environment", option)
+            }
+            availableBoxes={["PETS", "DISABILITY", "MIN_AGE", "MAX_RENTER"]}
           />
         </div>
         <div className="form-group">
@@ -202,9 +224,10 @@ const CreateListingPage = () => {
           <input
             className="auth-input"
             type="text"
-            value={pictureURL}
+            name="pictureURLs"
+            value={listing.pictureURLs}
             placeholder="Link"
-            onChange={(e) => setPictureURL(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="form-group">
@@ -213,14 +236,16 @@ const CreateListingPage = () => {
           </label>
           <input
             className="auth-input"
-            type="date"
+            type="text"
+            name="startDate"
             value={startDate}
             placeholder="Start Date"
             onChange={(e) => setStartDate(e.target.value)}
           />
           <input
             className="auth-input"
-            type="date"
+            type="text"
+            name="endDate"
             value={endDate}
             placeholder="End Date"
             onChange={(e) => setEndDate(e.target.value)}
