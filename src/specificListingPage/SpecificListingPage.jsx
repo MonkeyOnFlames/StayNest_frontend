@@ -1,31 +1,36 @@
-/* import { useState, useEffect } from "react"; */
+import { useState, useEffect } from "react";
 import Searchbar from "../searchbar/Searchbar";
 import InfoSquare from "../infoSquare/InfoSquare";
 import image from "../image/StayNest.jpg";
 import BookingSquare from "../bookingSquare/BookingSquare";
 import EnvironmentButton from "../environmentButton/environmentButton";
 import { getListingById } from "../api/listingService";
+import { useParams } from "react-router-dom";
 
-const listing = getListingById(id);
-
-
+//got help from this site:
+//https://www.squash.io/extracting-url-parameters-in-your-reactjs-component/
 const SpecificListingPage = () => {
+  const [listing, setListing] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-/*   const navigate = useNavigate();
-  // konsumerar contexten
-  const { id } = useAuth();
+  const { id } = useParams();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        const data = await getListingById(id);
+        setListing(data);
+      } catch (err) {
+        console.log("Error " + err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    try {
-      await id(username, password);
-      navigate("/");
-    } catch (err) {
-      console.log("error: " + err);
-    }
-  }; */
+    fetchListing();
+  }, []);
 
+  console.log("listing" + listing);
 
   const filters = [
     {
@@ -59,11 +64,8 @@ const SpecificListingPage = () => {
               {listing.name}
             </h2>
             <h2 style={{ margin: 0, fontSize: "2.5rem" }}>
-              A eco-friendly and <br />
-              welcoming stay <br />
-              for travelers <br />
+              {listing.description}
             </h2>
-            <p>Every place feels like home</p>
           </div>
         }
         image={<img src={image} alt="StayNest Logo" />}
@@ -75,7 +77,16 @@ const SpecificListingPage = () => {
         button={<Button text="Search" type="submit" width="10" />} */
       />
 
-      <EnvironmentButton environmentFilters={["ANY", "BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
+      <EnvironmentButton
+        environmentFilters={[
+          "ANY",
+          "BIKE",
+          "CHARGE_POST",
+          "KWH",
+          "RECYCLE",
+          "SOLAR_POWER",
+        ]}
+      />
 
       <BookingSquare />
     </div>

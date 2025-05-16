@@ -124,6 +124,7 @@ const Home = () => {
           name={listing.name}
           imageLinks={listing.pictureURLs}
           environments={listing.environment}
+          
           onClick={() => navigate(`/listings/${listing.id}`)}
         />
       ))}
