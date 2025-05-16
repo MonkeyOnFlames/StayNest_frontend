@@ -1,6 +1,7 @@
 import "./bookingSquare.css";
 import Button from "../button/button";
 import { useState } from "react";
+import { getListingById } from "../api/listingService";
 
 const BookingSquare = ({ availabilities, price }) => {
   const [checkIn, setCheckIn] = useState("");
