@@ -5,6 +5,9 @@ import Register from "./login/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import Header from "./header/header";
 import Footer from "./footer/Footer";
+import SpecificListingPage from "./specificListingPage/SpecificListingPage"
+
+
 
 function App() {
 
@@ -22,7 +25,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            {/* found info on this site: https://reactrouter.com/start/declarative/routing */}
+            <Route path="/listings"><Route path=":id" element={<SpecificListingPage />}/></Route>
           </Routes>
+          
           
           <Footer  />
           </div>

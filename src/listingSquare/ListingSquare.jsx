@@ -1,6 +1,6 @@
 import "./listing-square.css";
 
-function ListingSquare({ name, imageLinks, onClick, environments }) {
+function ListingSquare({ id, name, imageLinks, onClick, environments }) {
   let shownImage = imageLinks[0];
 
   return (
