@@ -2,8 +2,9 @@ import "./bookingSquare.css";
 import Button from "../button/button";
 import { useState } from "react";
 import { getListingById } from "../api/listingService";
+import { createBooking } from "../api/bookingService";
 
-const BookingSquare = ({ availabilities, price }) => {
+const BookingSquare = ({ id, availabilities, price }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [nrOfGuests, setNrOfGuests] = useState("");
@@ -13,7 +14,8 @@ const BookingSquare = ({ availabilities, price }) => {
   let availabilityStartDate;
   let availabilityEndDate;
 
-  //Found this when i searched to calculate the days between dates, https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
+  //Found this when i searched to calculate the days between dates:
+  //https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
   const daysBetween = (startDate, endDate) => {
     // Convert dates to UTC timestamps
     let startUtc = Date.UTC(
@@ -48,7 +50,7 @@ const BookingSquare = ({ availabilities, price }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -77,16 +79,21 @@ const BookingSquare = ({ availabilities, price }) => {
             availabilityEndDate >= bookingAvailability.endDate
           ) {
           } else {
-            throw new Error("Listing is not vaialable for those dates");
+            throw new Error("Listing is not avaialable for those dates");
           }
         });
       }
 
       if (checkInDate < new Date()) {
         throw new Error("You cannot book today or in the past");
-      }
+      }      
 
       setError("");
+
+      //have only made this changes 250516
+      await createBooking(id, checkIn, checkOut, nrOfGuests);
+      console.log("Booking successful!");
+
     } catch (err) {
       setError(err.message);
       console.log("error: " + err);
@@ -103,7 +110,7 @@ const BookingSquare = ({ availabilities, price }) => {
           </label>
           <input
             className="booking-input"
-            type="text"
+            type="date"
             placeholder="2025-01-01"
             value={checkIn}
             onChange={(e) => setCheckIn(e.target.value)}
@@ -115,7 +122,7 @@ const BookingSquare = ({ availabilities, price }) => {
           </label>
           <input
             className="booking-input"
-            type="text"
+            type="date"
             placeholder="2025-01-02"
             value={checkOut}
             onChange={(e) => setCheckOut(e.target.value)}
