@@ -90,9 +90,9 @@ const SpecificListingPage = () => {
       />
 
       <BookingSquare
-        id={id}
+        /* id={id}
         availabilities={listing.availabilities}
-        price={listing.price}
+        price={listing.price} */listing={listing}
       />
       {console.log(listing.availabilities)}
     </div>

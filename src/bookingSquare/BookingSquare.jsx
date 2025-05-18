@@ -4,15 +4,13 @@ import { useState } from "react";
 import { getListingById } from "../api/listingService";
 import { createBooking } from "../api/bookingService";
 
-const BookingSquare = ({ id, availabilities, price }) => {
+const BookingSquare = ({ /* id, availabilities, price */ listing }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [nrOfGuests, setNrOfGuests] = useState("");
   const [error, setError] = useState("");
   let checkInDate = new Date(checkIn);
   let checkOutDate = new Date(checkOut);
-  let availabilityStartDate;
-  let availabilityEndDate;
 
   //Found this when i searched to calculate the days between dates:
   //https://www.geeksforgeeks.org/how-to-calculate-the-number-of-days-between-two-dates-in-javascript/
@@ -60,25 +58,16 @@ const BookingSquare = ({ id, availabilities, price }) => {
         );
       }
 
-      if (checkOutDate < checkInDate) {
+      if (checkOut < checkIn) {
         throw new Error("Check-out cannot be before check-in");
       }
 
-      let bookingAvailability = {
-        startDate: checkInDate,
-        endDate: checkOutDate,
-      };
-
       {
-        availabilities.map((availability) => {
-          availabilityStartDate = new Date(availability.startDate);
-          availabilityEndDate = new Date(availability.endDate);
-
+        listing.availabilities.map((availability) => {
           if (
-            availabilityStartDate <= bookingAvailability.startDate &&
-            availabilityEndDate >= bookingAvailability.endDate
+            availability.startDate >= checkIn &&
+            availability.endDate <= checkOut
           ) {
-          } else {
             throw new Error("Listing is not avaialable for those dates");
           }
         });
@@ -86,24 +75,29 @@ const BookingSquare = ({ id, availabilities, price }) => {
 
       if (checkInDate < new Date()) {
         throw new Error("You cannot book today or in the past");
-      }      
-
-      setError("");
+      }
 
       //have only made this changes 250516
-      await createBooking(id, checkIn, checkOut, nrOfGuests);
+      await createBooking(listing.id, checkIn, checkOut /* , nrOfGuests */);
       console.log("Booking successful!");
 
+      alert("Booking successful!");
+
+      setCheckIn("");
+      setCheckOut("");
+      setNrOfGuests("");
+      setError("");
     } catch (err) {
       setError(err.message);
       console.log("error: " + err);
     }
   };
-
+  console.log(listing.id);
+  console.log("bookingS" + listing.availabilities);
   return (
     <div className="booking-square">
       <form onSubmit={handleSubmit}>
-        <h2>{price} / night</h2>
+        <h2>{listing.price} / night</h2>
         <div className="check-in">
           <label htmlFor="checkIn">
             Check-In<br></br>
@@ -143,7 +137,7 @@ const BookingSquare = ({ id, availabilities, price }) => {
         <p className="error-message">{error}</p>
         <Button text="Book now" type="submit" />
         <div className="total-price">
-          Total price: {totalPrice(checkInDate, checkOutDate, price)}
+          Total price: {totalPrice(checkInDate, checkOutDate, listing.price)}
         </div>
       </form>
     </div>

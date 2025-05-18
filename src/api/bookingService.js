@@ -23,9 +23,9 @@ export const deleteBooking = async (id) => {
 export const createBooking = async (listingId, startDate, endDate) => {
   try {
     const response  = await api.post("/api/bookings", {
-      listingId,
-      startDate,
-      endDate,
+      listing:{id:listingId},
+      startDate:startDate,
+      endDate:endDate,
     });
     return response.data;
   } catch (error) {
