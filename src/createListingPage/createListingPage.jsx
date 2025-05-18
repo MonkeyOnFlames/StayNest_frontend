@@ -2,9 +2,12 @@ import "../login/auth.css";
 import { useState, useEffect } from "react";
 import Button from "../button/button";
 import { createListing } from "../api/listingService";
+import { useNavigate } from "react-router-dom";
 import CheckBox from "../checkBox/CheckBox";
 
 const CreateListingPage = () => {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [listing, setListing] = useState({
     name: "",
     location: "",
@@ -22,11 +25,13 @@ const CreateListingPage = () => {
       },
     ],
   });
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [availability, setAvailability] = useState({
+    startDate: "",
+    endDate: "",
+  });
+  const [tempAvailabilities, setTempAvailabilities] = useState([]);
   const [error, setError] = useState("");
-
-  
+  const navigate = useNavigate();
 
   // dynamig onChange metod som kan hantera varje property i objektet som INTE är en array
   const handleChange = (e) => {
@@ -37,35 +42,69 @@ const CreateListingPage = () => {
     }));
   };
 
+  const handleArrayOptionToggle = (arrayName, option) => {
+    const currentArray = [...listing[arrayName]];
+
+    // om option redan finns, ta bort den, annars lägg till den
+    if (currentArray.includes(option)) {
+      const updatedArray = currentArray.filter((item) => item !== option);
+      setListing({
+        ...listing,
+        [arrayName]: updatedArray,
+      });
+    } else {
+      setListing({
+        ...listing,
+        [arrayName]: [...currentArray, option],
+      });
+    }
+  };
+
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-    if (
-      !listing.name ||
-      !listing.location ||
-      !listing.description ||
-      !listing.price ||
-      !listing.listingTypes ||
-      !listing.listingPolicy ||
-      !listing.pictureURLs ||
-      !startDate ||
-      !endDate
-    ) {
-      throw new Error(
-        "All fields except environment and restrictions are required"
-      );
-    }
-
-    setError("");
-
-    await createListing(listing);
-    navigate("/");
-  } catch (err) {
-    setError(err.message);
-    console.log("error: " + err);
-  }
     // här skriver du kod för att skicka till API:et
+    try {
+      if (
+        !listing.name ||
+        !listing.location ||
+        !listing.description ||
+        !listing.price ||
+        !listing.listingTypes ||
+        !listing.listingPolicy ||
+        !listing.pictureURLs ||
+        !startDate ||
+        !endDate
+      ) {
+        throw new Error(
+          "All fields except environment and restrictions are required"
+        );
+      }
+
+      if (startDate > endDate) {
+        throw new Error("End date cannot before start date");
+      }
+
+      setError("");
+
+      setAvailability({
+      startDate: startDate,
+      endDate: endDate,
+    });
+    
+    setTempAvailabilities(availability);
+
+    
+
+      await createListing(listing);
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      console.log("error: " + err);
+    }
     console.log(listing);
+    console.log(tempAvailabilities)
   };
 
   // för mer komplexa fält som arrays (listingTypes, environment, restrictions, pictureURLs)
@@ -86,31 +125,10 @@ const CreateListingPage = () => {
       availabilities: newAvailabilities,
     }));
 
-    const handleArrayOptionToggle = (arrayName, option) => {
-      const currentArray = [...listing[arrayName]];
-
-      // om option redan finns, ta bort den, annars lägg till den
-      if (currentArray.includes(option)) {
-        const updatedArray = currentArray.filter((item) => item !== option);
-        setListing({
-          ...listing,
-          [arrayName]: updatedArray,
-        });
-      } else {
-        setListing({
-          ...listing,
-          [arrayName]: [...currentArray, option],
-        });
-      }
-    };
-    let availability = {
-      startDate: startDate,
-      endDate: endDate,
-    };
-
-    let tempAvailabilities = [availability];
 
     handleAvailabilityChange(tempAvailabilities);
+
+    
   };
   return (
     <div className="auth-container">
@@ -212,7 +230,7 @@ const CreateListingPage = () => {
             boxName="Restrictions"
             selectedBox={listing.restrictions}
             onSelect={(option) =>
-              handleArrayOptionToggle("environment", option)
+              handleArrayOptionToggle("restrictions", option)
             }
             availableBoxes={["PETS", "DISABILITY", "MIN_AGE", "MAX_RENTER"]}
           />
@@ -227,7 +245,7 @@ const CreateListingPage = () => {
             name="pictureURLs"
             value={listing.pictureURLs}
             placeholder="Link"
-            onChange={handleChange}
+            onChange={(e) => handleArrayChange("pictureURLs", [e.target.value])}
           />
         </div>
         <div className="form-group">
@@ -236,7 +254,7 @@ const CreateListingPage = () => {
           </label>
           <input
             className="auth-input"
-            type="text"
+            type="date"
             name="startDate"
             value={startDate}
             placeholder="Start Date"
@@ -244,14 +262,13 @@ const CreateListingPage = () => {
           />
           <input
             className="auth-input"
-            type="text"
+            type="date"
             name="endDate"
             value={endDate}
             placeholder="End Date"
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
-
         <p className="error-message">{error}</p>
 
         <Button

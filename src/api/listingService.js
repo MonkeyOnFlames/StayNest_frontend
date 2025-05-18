@@ -62,30 +62,19 @@ export const getListingByPriceRange = async (minPrice, maxPrice) => {
   }
 };
 
-export const createListing = async (
-  listingName,
-  location,
-  description,
-  price,
-  listingTypes,
-  listingPolicy,
-  environment,
-  restrictions,
-  pictureURLs,
-  availabilities
-) => {
+export const createListing = async (listing) => {
   try {
     const response = await api.post("/api/listings", {
-      listingName,
-      location,
-      description,
-      price,
-      listingTypes,
-      listingPolicy,
-      environment,
-      restrictions,
-      pictureURLs,
-      availabilities,
+      name: listing.name,
+      location: listing.location,
+      description: listing.description,
+      price: listing.price,
+      listingTypes: listing.listingTypes,
+      listingPolicy: listing.listingPolicy,
+      environment: listing.environment,
+      restrictions: listing.restrictions,
+      pictureURLs: listing.pictureURLs,
+      availabilities: listing.availabilities,
     });
     return response.data;
   } catch (error) {
