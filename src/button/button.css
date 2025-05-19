@@ -8,3 +8,11 @@
   background-color: #f59c79;
   color: black;
 }
+
+@media (min-width: 390px) {
+.button {
+  padding: 10px 10px; 
+  font-size: 14px;
+}
+
+}

@@ -1,35 +1,46 @@
 .header {
-    background-color:#EFEFEF;
-    width: 100%;
-    padding: 5px;
-    display: grid;
-    justify-content: space-between;
-    flex-direction: row;
-    position: relative;
-    grid-template-columns: 1fr auto;
-    color: rgb(0, 0, 0);
+  background-color: #efefef;
+  width: 100%;
+  padding: 5px;
+  display: grid;
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+  grid-template-columns: 1fr auto;
+  color: rgb(0, 0, 0);
 }
 
 #headerimg {
-    left: 20px;
-    top: 25px;
-    position: relative;
-    width: 60px;
-    height: 60px;
-    border-radius: 5px;
+  left: 20px;
+  top: 25px;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
 }
 
 .linkButton {
-
-    bottom: 25px;
-    align-content: center;
-    display: flex;
-    position: relative;
-    width: 10%;
-    margin-left: 77%;
+  bottom: 25px;
+  align-content: center;
+  display: flex;
+  position: relative;
+  width: 10%;
+  margin-left: 77%;
 }
 
+@media (max-width: 391px) {
 
+  
 
+  .linkButton {
+    margin-left: 20%;
+    padding: 1%;
+    bottom: 35px;
+  }
+
+  #headerimg {
+    left: 10px;
+  }
+}
 
 

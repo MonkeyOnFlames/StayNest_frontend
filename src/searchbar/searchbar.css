@@ -1,15 +1,15 @@
 .search-container {
   background-color: #efefef;
   color: black;
-  margin: 0rem 20%;
+  margin: 0rem 2.5%;
   width: 90rem;
   display: flex;
   justify-content: center;
   flex-direction: row;
   align-items: center;
   height: fit-content;
-  padding: 10px /* 10px */;
-/*   gap: 0rem; */
+  padding: 10px ;
+
 
   position: relative;
   overflow: visible;
@@ -89,4 +89,16 @@
   top: 100%;
   left: 0;
   z-index: 15;
+}
+
+@media (max-width: 391px) {
+
+  .search-container {
+    width: 23.2rem;
+  }
+
+  .search-filter {
+    padding: 0.5rem 1rem;
+  }
+
 }
