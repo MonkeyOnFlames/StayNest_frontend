@@ -14,7 +14,7 @@ const EnvironmentButton = ({environmentFilters}) => {
             Bike
           </button>
         ) : environmentFilter === "CHARGE_POST" ? (
-          <button key={environmentFilter} className="env-button" > <img src={Images3} id="Recycleimg" alt="ChargePost logo" />
+          <button key={environmentFilter} className="env-button" > <img src={Images3} id="ChargePostimg" alt="ChargePost logo" />
             Charge post
           </button>
         ) : environmentFilter === "KWH" ? (

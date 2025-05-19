@@ -1,5 +1,5 @@
 import "./searchbar.css";
-//import Button from "../button/button";
+
 
 const Searchbar = ({ input, filters, button }) => {
   return (

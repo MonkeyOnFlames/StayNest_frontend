@@ -86,18 +86,18 @@ const Home = () => {
       <InfoSquare
         text={
           <div>
-            <h2 style={{ marginBottom: "0.5rem", fontWeight: 400 }}>
+            <h2 >
               Stay Nest
             </h2>
-            <h2 style={{ margin: 0, fontSize: "2.5rem" }}>
+            <h3>
               A eco-friendly and <br />
               welcoming stay <br />
               for travelers <br />
-            </h2>
+            </h3>
             <p>Every place feels like home</p>
           </div>
         }
-        image={<img src={image} alt="StayNest Logo" />}
+        image={<img src={image} id="infoLogoImg" alt="StayNest Logo" />}
       />
 
       <Searchbar
