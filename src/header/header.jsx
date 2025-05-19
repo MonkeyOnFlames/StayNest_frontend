@@ -21,6 +21,10 @@ const Header = () => {
         <Link className="linkRegister" to="/register">
           <Button text="Register" />
         </Link>
+
+        <Link className="linkCreateListing" to="/createListing">
+          <Button text="Create Listing" width="9" />
+        </Link>
         </div>
       </nav>
     </header>
