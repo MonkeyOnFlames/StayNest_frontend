@@ -8,6 +8,7 @@ import CollapsibleSection from "../searchbar/CollapsibleSection";
 import Button from "../button/button";
 import { getAllListings } from "../api/listingService";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const searchInput = (
   <input
@@ -62,6 +63,7 @@ const Home = () => {
   const [listings, setListings] = useState([]);
   const [filteredListings, setFilteredListings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -78,7 +80,6 @@ const Home = () => {
 
     fetchListings();
   }, []);
-
 
   return (
     <div className="home">
@@ -105,12 +106,28 @@ const Home = () => {
         button={<Button text="Search" type="submit" width="10" />}
       />
 
-       <EnvironmentButton environmentFilters={["ANY", "BIKE", "CHARGE_POST", "KWH", "RECYCLE", "SOLAR_POWER"]} />
+      <EnvironmentButton
+        environmentFilters={[
+          "ANY",
+          "BIKE",
+          "CHARGE_POST",
+          "KWH",
+          "RECYCLE",
+          "SOLAR_POWER",
+        ]}
+      />
 
-      {listings.map((listing) => 
-      <ListingSquare key={listing.id} name={listing.name} imageLinks={listing.pictureURLs} environments={listing.environment} />
-      )}
-      
+      {listings.map((listing) => (
+        <ListingSquare
+          id={listing.id}
+          key={listing.id}
+          name={listing.name}
+          imageLinks={listing.pictureURLs}
+          environments={listing.environment}
+          
+          onClick={() => navigate(`/listings/${listing.id}`)}
+        />
+      ))}
     </div>
   );
 };
