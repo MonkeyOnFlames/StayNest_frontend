@@ -13,6 +13,7 @@ const SpecificListingPage = () => {
   const [listing, setListing] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //get the id from the url
   const { id } = useParams();
 
   useEffect(() => {
@@ -88,7 +89,12 @@ const SpecificListingPage = () => {
         ]}
       />
 
-      <BookingSquare />
+      <BookingSquare
+        /* id={id}
+        availabilities={listing.availabilities}
+        price={listing.price} */listing={listing}
+      />
+      {console.log(listing.availabilities)}
     </div>
   );
 };
