@@ -8,9 +8,6 @@ import { useAuth } from "../hooks/useAuth";
 const Header = () => {
   const { currentUser, logout } = useAuth();
 
-  /*   const isAdmin =
-    currentUser && currentUser.roles && currentUser.roles.includes("ADMIN"); */
-
   const handleLogout = async () => {
     await logout();
   };
@@ -25,29 +22,26 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="linkButton">
-            {currentUser ? (
-              <>
-                <Link className="linkCreateListing" to="/createListing">
-                  <Button text="Create Listing" /* width="9" */ />
-                </Link>
+          {currentUser ? (
+            <div className="linkButton">
+              <Link className="linkCreateListing" to="/createListing">
+                <Button text="Create Listing" width="7" />
+              </Link>
 
-                <Link className="logout" onClick={handleLogout}>
-                    <Button text="Logout" /* width="5" */ />
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="linkLogin" to="/login">
-                  <Button text="Login" /* width="5" *//>
-                </Link>
-
-                <Link className="linkRegister" to="/register">
-                  <Button text="Register" /* width="5" */ />
-                </Link>
-              </>
-            )}
-          </div>
+              <Link className="logout" onClick={handleLogout}>
+                <Button text="Logout" width="5" />
+              </Link>
+            </div>
+          ) : (
+            <div className="linkButton">
+              <Link className="linkRegister" to="/register">
+                <Button text="Register" width="5" />
+              </Link>
+              <Link className="linkLogin" to="/login">
+                <Button text="Login" width="5" />
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>
