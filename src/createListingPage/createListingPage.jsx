@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import CheckBox from "../checkBox/CheckBox";
 
 const CreateListingPage = () => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [listing, setListing] = useState({
     name: "",
     location: "",
@@ -29,7 +27,6 @@ const CreateListingPage = () => {
     startDate: "",
     endDate: "",
   });
-  const [tempAvailabilities, setTempAvailabilities] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -60,8 +57,6 @@ const CreateListingPage = () => {
     }
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // här skriver du kod för att skicka till API:et
@@ -74,28 +69,19 @@ const CreateListingPage = () => {
         !listing.listingTypes ||
         !listing.listingPolicy ||
         !listing.pictureURLs ||
-        !startDate ||
-        !endDate
+        !availability.startDate ||
+        !availability.endDate
       ) {
         throw new Error(
           "All fields except environment and restrictions are required"
         );
       }
 
-      if (startDate > endDate) {
+      if (availability.startDate > availability.endDate) {
         throw new Error("End date cannot before start date");
       }
 
       setError("");
-
-      setAvailability({
-      startDate: startDate,
-      endDate: endDate,
-    });
-    
-    setTempAvailabilities(availability);
-
-    
 
       await createListing(listing);
       navigate("/");
@@ -103,8 +89,6 @@ const CreateListingPage = () => {
       setError(err.message);
       console.log("error: " + err);
     }
-    console.log(listing);
-    console.log(tempAvailabilities)
   };
 
   // för mer komplexa fält som arrays (listingTypes, environment, restrictions, pictureURLs)
@@ -124,11 +108,6 @@ const CreateListingPage = () => {
       ...prev,
       availabilities: newAvailabilities,
     }));
-
-
-    handleAvailabilityChange(tempAvailabilities);
-
-    
   };
   return (
     <div className="auth-container">
@@ -256,17 +235,32 @@ const CreateListingPage = () => {
             className="auth-input"
             type="date"
             name="startDate"
-            value={startDate}
+            value={availability.startDate}
             placeholder="Start Date"
-            onChange={(e) => setStartDate(e.target.value)}
+            onChange={(e) =>
+              setAvailability({
+                startDate: e.target.value,
+                endDate: availability.endDate,
+              })
+            }
           />
           <input
             className="auth-input"
             type="date"
             name="endDate"
-            value={endDate}
+            value={availability.endDate}
             placeholder="End Date"
-            onChange={(e) => setEndDate(e.target.value)}
+            onChange={(e) =>
+              setAvailability({
+                startDate: availability.startDate,
+                endDate: e.target.value,
+              })
+            }
+          />
+          <CheckBox
+            boxName="Confirm availibility"
+            onSelect={(option) => handleAvailabilityChange([availability])}
+            availableBoxes={["Confirm"]}
           />
         </div>
         <p className="error-message">{error}</p>
