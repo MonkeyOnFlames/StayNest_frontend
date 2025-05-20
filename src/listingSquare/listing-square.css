@@ -7,7 +7,7 @@
   flex-direction: column;
   cursor: pointer;
   border: none;
-  margin: 2rem;
+  margin: 2rem 1rem 0.5rem 2rem;
 }
 
 .listing-image {
@@ -57,4 +57,10 @@
   display: flex;
   position: relative;
   justify-content: space-evenly;
+}
+
+@media (max-width: 391px) {
+  .listing-square {
+    margin: 1rem 2rem 0.5rem 2rem;
+  }
 }
