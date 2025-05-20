@@ -25,12 +25,12 @@
   display: flex;
   position: relative;
   width: 10%;
-  margin-left: 10%;
+  margin-left: 80%;
 }
 
 @media (max-width: 391px) {
   .linkButton {
-    margin-left: 35%;
+    margin-left: 40%;
     padding: 1%;
     bottom: 35px;
   }
