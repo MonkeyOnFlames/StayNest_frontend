@@ -2,13 +2,19 @@ import Button from "../button/button";
 import "./header.css";
 import image from "../image/StayNest.jpg";
 import { Link } from "react-router";
-import Login from "../login/Login";
+/* import Login from "../login/Login"; */
 import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
-  const isAdmin =
-    currentUser && currentUser.roles && currentUser.roles.includes("ADMIN");
+
+  /*   const isAdmin =
+    currentUser && currentUser.roles && currentUser.roles.includes("ADMIN"); */
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <header className="header">
       <div>
@@ -19,24 +25,29 @@ const Header = () => {
             </Link>
           </div>
 
-          {currentUser ? (
-            <>
-              <Link to="/">
-                <button className="logout" onClick={handleLogout}>
-                  Logout
-                </button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link className="link" to="/login">
-                Login
-              </Link>
-              <Link className="link" to="/register">
-                Register
-              </Link>
-            </>
-          )}
+          <div className="linkButton">
+            {currentUser ? (
+              <>
+                <Link className="linkCreateListing" to="/createListing">
+                  <Button text="Create Listing" /* width="9" */ />
+                </Link>
+
+                <Link className="logout" onClick={handleLogout}>
+                    <Button text="Logout" /* width="5" */ />
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link className="linkLogin" to="/login">
+                  <Button text="Login" /* width="5" *//>
+                </Link>
+
+                <Link className="linkRegister" to="/register">
+                  <Button text="Register" /* width="5" */ />
+                </Link>
+              </>
+            )}
+          </div>
         </nav>
       </div>
     </header>

@@ -29,11 +29,9 @@
 }
 
 @media (max-width: 391px) {
-
-  
-
   .linkButton {
-    margin-left: 20%;
+    
+    margin-left: 40%;
     padding: 1%;
     bottom: 35px;
   }
@@ -42,5 +40,3 @@
     left: 10px;
   }
 }
-
-
