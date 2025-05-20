@@ -69,7 +69,7 @@ const SpecificListingPage = () => {
             </h2>
           </div>
         }
-        image={<img src={image} alt="StayNest Logo" />}
+        image={<img src={listing.image} alt="StayNest Logo" />}
       />
 
       <Searchbar
