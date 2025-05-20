@@ -4,7 +4,7 @@ import { useState } from "react";
 import { getListingById } from "../api/listingService";
 import { createBooking } from "../api/bookingService";
 
-const BookingSquare = ({ /* id, availabilities, price */ listing }) => {
+const BookingSquare = ({ listing }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [nrOfGuests, setNrOfGuests] = useState("");
@@ -77,7 +77,6 @@ const BookingSquare = ({ /* id, availabilities, price */ listing }) => {
         throw new Error("You cannot book today or in the past");
       }
 
-      //have only made this changes 250516
       await createBooking(listing.id, checkIn, checkOut /* , nrOfGuests */);
       console.log("Booking successful!");
 
@@ -92,8 +91,9 @@ const BookingSquare = ({ /* id, availabilities, price */ listing }) => {
       console.log("error: " + err);
     }
   };
-  console.log(listing.id);
+
   console.log("bookingS" + listing.availabilities);
+
   return (
     <div className="booking-square">
       <form onSubmit={handleSubmit}>
