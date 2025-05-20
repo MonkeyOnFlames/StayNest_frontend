@@ -2,7 +2,6 @@ import Button from "../button/button";
 import "./header.css";
 import image from "../image/StayNest.jpg";
 import { Link } from "react-router";
-/* import Login from "../login/Login"; */
 import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {

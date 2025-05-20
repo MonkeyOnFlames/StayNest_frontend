@@ -72,11 +72,7 @@ const SpecificListingPage = () => {
         image={<img src={image} alt="StayNest Logo" />}
       />
 
-      <Searchbar
-        filters={filters}
-        /* input={searchInput}        
-        button={<Button text="Search" type="submit" width="10" />} */
-      />
+      <Searchbar filters={filters} />
 
       <EnvironmentButton
         environmentFilters={[
@@ -89,11 +85,7 @@ const SpecificListingPage = () => {
         ]}
       />
 
-      <BookingSquare
-        /* id={id}
-        availabilities={listing.availabilities}
-        price={listing.price} */listing={listing}
-      />
+      <BookingSquare listing={listing} />
       {console.log(listing.availabilities)}
     </div>
   );
