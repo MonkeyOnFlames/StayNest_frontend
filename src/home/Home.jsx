@@ -114,7 +114,7 @@ const Home = () => {
           "SOLAR_POWER",
         ]}
       />
-
+      <div className="listing-container">
       {listings.map((listing) => (
         <ListingSquare
           id={listing.id}
@@ -124,7 +124,9 @@ const Home = () => {
           environments={listing.environment}
           onClick={() => navigate(`/listings/${listing.id}`)}
         />
+        
       ))}
+      </div>
     </div>
   );
 };

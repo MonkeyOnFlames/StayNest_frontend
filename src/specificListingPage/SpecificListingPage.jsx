@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Searchbar from "../searchbar/Searchbar";
 import InfoSquare from "../infoSquare/InfoSquare";
-import image from "../image/StayNest.jpg";
 import BookingSquare from "../bookingSquare/BookingSquare";
 import EnvironmentButton from "../environmentButton/environmentButton";
 import { getListingById } from "../api/listingService";
 import { useParams } from "react-router-dom";
+import "./specifikListingPage.css";
 
 //got help from this site:
 //https://www.squash.io/extracting-url-parameters-in-your-reactjs-component/
@@ -61,15 +61,17 @@ const SpecificListingPage = () => {
       <InfoSquare
         text={
           <div>
-            <h2 style={{ marginBottom: "0.5rem", fontWeight: 400 }}>
-              {listing.name}
-            </h2>
-            <h2 style={{ margin: 0, fontSize: "2.5rem" }}>
-              {listing.description}
-            </h2>
+            <h2>{listing.name}</h2>
+            <h3>{listing.description}</h3>
           </div>
         }
-        image={<img src={image} alt="StayNest Logo" />}
+        image={
+          <img
+            src={listing.pictureURLs}
+            id="infoListingImg"
+            alt="Listing image"
+          />
+        }
       />
 
       <Searchbar filters={filters} />
