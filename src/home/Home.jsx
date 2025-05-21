@@ -34,8 +34,7 @@ const filters = [
     label: "Listing Type",
     value: (
       <CollapsibleSection title="Residence ">
-        <p>Garden</p>
-        <p>House</p>
+        <p>Site</p>
       </CollapsibleSection>
     ),
   },
@@ -115,17 +114,16 @@ const Home = () => {
         ]}
       />
       <div className="listing-container">
-      {listings.map((listing) => (
-        <ListingSquare
-          id={listing.id}
-          key={listing.id}
-          name={listing.name}
-          imageLinks={listing.pictureURLs}
-          environments={listing.environment}
-          onClick={() => navigate(`/listings/${listing.id}`)}
-        />
-        
-      ))}
+        {listings.map((listing) => (
+          <ListingSquare
+            id={listing.id}
+            key={listing.id}
+            name={listing.name}
+            imageLinks={listing.pictureURLs}
+            environments={listing.environment}
+            onClick={() => navigate(`/listings/${listing.id}`)}
+          />
+        ))}
       </div>
     </div>
   );

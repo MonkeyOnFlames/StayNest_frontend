@@ -1,3 +1,7 @@
+/* Took a screenshot of the searchbar in our figma and asked chatGPT to make a CSS for it.
+Have made some changes so it's not exactly the same.
+@media is done by us /Robert */
+
 .search-container {
   background-color: #efefef;
   color: black;
@@ -9,8 +13,6 @@
   align-items: center;
   height: fit-content;
   padding: 10px ;
-
-
   position: relative;
   overflow: visible;
   flex-wrap: wrap;
@@ -25,7 +27,6 @@
   align-items: flex-start;
   gap: 7px;
   padding: 0.5rem 2rem;
-
   position: relative;
   overflow: visible;
 }
@@ -55,7 +56,6 @@
 
 .filter-value {
   position: relative;
-
   margin-left: -30px;
   cursor: pointer;
 }
@@ -63,8 +63,7 @@
 .search-icon {
     background-color: black;
     height: 22px;
-    width: 22px;
-  
+    width: 22px;  
     color: white;
     text-align: center;
     align-items: center;

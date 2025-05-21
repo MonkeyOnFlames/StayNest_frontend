@@ -1,3 +1,31 @@
+/* wrote in chatGPT that "I want to make a dynamic info where the left side is text and right side can be a logo or pictures 
+that i can use on different places on my site. This is my code:
+
+import "./info-square.css";
+
+const InfoSquare = ({ text, width, height, fontSize }) => {
+  return (
+    <div
+      className="info-container"
+      style={{
+        width: ${width}rem,
+        height: ${height}rem,
+        fontSize: ${fontSize}rem,
+      }}
+    >
+      <div className="info">{text}</div>
+      <div className="logo">{Image}</div>
+    </div>
+  );
+};
+
+export default InfoSquare;".
+
+It gave me a flexbox so I wrote "I want to use grid instead of flexbox".
+
+Have made some changes in both the code and CSS so it's not exactly the same.
+@media is done by us /Robert */
+
 .info-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
