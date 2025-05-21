@@ -86,9 +86,7 @@ const Home = () => {
       <InfoSquare
         text={
           <div>
-            <h2 >
-              Stay Nest
-            </h2>
+            <h2>Stay Nest</h2>
             <h3>
               A eco-friendly and <br />
               welcoming stay <br />
@@ -124,7 +122,6 @@ const Home = () => {
           name={listing.name}
           imageLinks={listing.pictureURLs}
           environments={listing.environment}
-          
           onClick={() => navigate(`/listings/${listing.id}`)}
         />
         
