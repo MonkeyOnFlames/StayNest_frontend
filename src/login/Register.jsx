@@ -101,7 +101,7 @@ const Register = () => {
           </label>
           <input
             className="auth-input"
-            type="number"
+            type="text"
             value={phone}
             placeholder="With country code"
             onChange={(e) => setPhone(e.target.value)}
